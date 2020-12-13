@@ -21,25 +21,26 @@ export const actions = {
   }),
 };
 
-export const reducer = (state = INITIAL_STATE, action) => {
-  const {payload = {}} = action;
+export const reducer = (state, action) => {
+  const {payload} = action;
+  const oldState = state || INITIAL_STATE;
 
   switch (action.type) {
     case types.CHANNELS_FETCH_LIST: {
       return {
-        ...state,
+        ...oldState,
         fetching: true,
       };
     }
     case types.CHANNELS_SAVE_LIST: {
       return {
-        ...state,
+        ...oldState,
         list: payload,
         fetching: false,
       };
     }
     default: {
-      return {...state};
+      return {...oldState};
     }
   }
 };
