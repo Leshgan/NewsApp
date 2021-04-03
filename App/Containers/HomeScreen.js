@@ -14,7 +14,21 @@ class HomeScreen extends PureComponent {
   }
 
   renderList() {
-    return <Text>Home Screen</Text>;
+    const {channels} = this.props;
+    return (
+      <ScrollView>
+        {
+          channels.map(channel => (
+            <View
+              key={channel.id}
+              style={styles.channelCardContainer}
+            >
+
+            </View>
+          ))
+        }
+      </ScrollView>
+    );
   }
 
   render() {
@@ -44,6 +58,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  channelCardContainer: {},
 });
 
 HomeScreen.prototypes = {
