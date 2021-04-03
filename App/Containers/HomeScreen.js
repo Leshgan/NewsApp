@@ -1,8 +1,10 @@
 import React, {PureComponent} from 'react';
-import {View, Text, StyleSheet, ActivityIndicator} from 'react-native';
+import {View, StyleSheet, ActivityIndicator, FlatList} from 'react-native';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {actions} from '../Redux/ChannelsRedux';
+import ChannelCard from '../Component/ChannelCard';
+import {resize} from '../utils/measures';
 
 class HomeScreen extends PureComponent {
   componentDidMount() {
@@ -13,22 +15,11 @@ class HomeScreen extends PureComponent {
     });
   }
 
+  renderItem = ({item}) => <ChannelCard key={item.id} channel={item} />;
+
   renderList() {
     const {channels} = this.props;
-    return (
-      <ScrollView>
-        {
-          channels.map(channel => (
-            <View
-              key={channel.id}
-              style={styles.channelCardContainer}
-            >
-
-            </View>
-          ))
-        }
-      </ScrollView>
-    );
+    return <FlatList data={channels} renderItem={this.renderItem} />;
   }
 
   render() {
@@ -53,15 +44,16 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#5D1049',
+    paddingTop: resize(10),
   },
   loading: {
     justifyContent: 'center',
     alignItems: 'center',
   },
-  channelCardContainer: {},
 });
 
-HomeScreen.prototypes = {
+HomeScreen.propTypes = {
   channels: PropTypes.array,
   fetching: PropTypes.bool,
   getChannels: PropTypes.func,

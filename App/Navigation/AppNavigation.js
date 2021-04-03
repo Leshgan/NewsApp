@@ -13,8 +13,10 @@ export default class AppNavigation extends PureComponent {
   tabBar = () => (
     <Tab.Navigator
       tabBarOptions={{
-        activeTintColor: 'tomato',
+        activeTintColor: 'white',
         inactiveTintColor: 'gray',
+        activeBackgroundColor: '#4E0D3A', //'#E30425',
+        inactiveBackgroundColor: '#4E0D3A',
       }}>
       <Tab.Screen
         name="Home"
@@ -46,7 +48,16 @@ export default class AppNavigation extends PureComponent {
   render() {
     return (
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: '#4E0D3A',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}>
           <Stack.Screen
             name="App"
             component={this.mainStack}
