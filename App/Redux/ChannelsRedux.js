@@ -9,6 +9,7 @@ export const INITIAL_STATE = Immutable({
 export const types = {
   CHANNELS_FETCH_LIST: 'CHANNELS_FETCH_LIST',
   CHANNELS_SAVE_LIST: 'CHANNELS_SAVE_LIST',
+  CHANNELS_TOGGLE_FAVORITE: 'CHANNELS_TOGGLE_FAVORITE',
 };
 
 export const actions = {
@@ -17,6 +18,10 @@ export const actions = {
   }),
   saveList: (payload) => ({
     type: types.CHANNELS_SAVE_LIST,
+    payload,
+  }),
+  toggleFavorite: (payload) => ({
+    type: types.CHANNELS_TOGGLE_FAVORITE,
     payload,
   }),
 };
@@ -37,6 +42,19 @@ export const reducer = (state, action) => {
         ...oldState,
         list: payload,
         fetching: false,
+      };
+    }
+    case types.CHANNELS_TOGGLE_FAVORITE: {
+      const {favorite: oldFavorites} = state;
+      const index = oldFavorites.findIndex(({id}) => id === payload.id);
+      if (index > -1) {
+        oldFavorites.splice(index, 1);
+      } else {
+        oldFavorites.push(payload);
+      }
+      return {
+        ...oldState,
+        favorite: [...oldFavorites],
       };
     }
     default: {

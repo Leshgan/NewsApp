@@ -8,11 +8,8 @@ import {resize} from '../utils/measures';
 
 class HomeScreen extends PureComponent {
   componentDidMount() {
-    const {navigation, getChannels} = this.props;
+    const {getChannels} = this.props;
     getChannels();
-    navigation.setOptions({
-      title: 'All channels',
-    });
   }
 
   renderItem = ({item}) => <ChannelCard key={item.id} channel={item} />;

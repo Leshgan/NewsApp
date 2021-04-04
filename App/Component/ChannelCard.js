@@ -1,12 +1,19 @@
 import React, {PureComponent} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import PropTypes from 'prop-types';
-import {resize} from '../utils/measures';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {connect} from 'react-redux';
+import {actions} from '../Redux/ChannelsRedux';
+import {resize} from '../utils/measures';
 
 class ChannelCard extends PureComponent {
+  handleToggle = () => {
+    const {channel, toggle} = this.props;
+    toggle(channel);
+  };
+
   render() {
-    const {channel} = this.props;
+    const {channel, inFavorites} = this.props;
 
     return (
       <View style={styles.wrapper}>
@@ -19,8 +26,12 @@ class ChannelCard extends PureComponent {
           </Text>
         </View>
         <View style={styles.actions}>
-          <TouchableOpacity>
-            <Icon name="star" size={30} />
+          <TouchableOpacity onPress={this.handleToggle}>
+            <Icon
+              name="star"
+              size={30}
+              style={inFavorites ? styles.starInFavorite : styles.starDefault}
+            />
           </TouchableOpacity>
         </View>
       </View>
@@ -43,18 +54,35 @@ const styles = StyleSheet.create({
   content: {
     flexShrink: 10,
     flexBasis: 300,
+    padding: resize(5),
   },
   actions: {
     flexShrink: -10,
-    // flexBasis: 100,
+    padding: resize(5),
   },
   textColor: {
     color: 'white',
+  },
+  starInFavorite: {
+    color: 'yellow',
+  },
+  starDefault: {
+    color: 'black',
   },
 });
 
 ChannelCard.propTypes = {
   channel: PropTypes.object,
+  inFavorites: PropTypes.bool,
+  toggle: PropTypes.func,
 };
 
-export default ChannelCard;
+const mapStateToProps = (state, props) => ({
+  inFavorites: state.channels.favorite.some(({id}) => props.channel.id === id),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  toggle: (channel) => dispatch(actions.toggleFavorite(channel)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChannelCard);

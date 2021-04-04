@@ -25,6 +25,7 @@ export default class AppNavigation extends PureComponent {
           tabBarIcon: ({focused, color, size}) => (
             <Ionicons name="list" size={size} color={color} />
           ),
+          title: 'All channels',
         })}
       />
       <Tab.Screen
@@ -34,6 +35,7 @@ export default class AppNavigation extends PureComponent {
           tabBarIcon: ({focused, color, size}) => (
             <Ionicons name="star" size={size} color={color} />
           ),
+          title: 'Favorite',
         })}
       />
     </Tab.Navigator>
