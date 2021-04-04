@@ -1,11 +1,18 @@
 import React, {PureComponent} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet, FlatList} from 'react-native';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+import {common} from '../Styles/common';
+import {resize} from '../utils/measures';
+import ChannelCard from '../Component/ChannelCard';
 
 class FavoriteScreen extends PureComponent {
+  renderItem = ({item}) => <ChannelCard key={item.id} channel={item} />;
+
   render() {
     return (
       <View style={styles.container}>
-        <Text>Favorite</Text>
+        <FlatList data={this.props.favorite} renderItem={this.renderItem} />
       </View>
     );
   }
@@ -16,7 +23,22 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: common.mainBackgroundColor,
+    paddingTop: resize(10),
   },
 });
 
-export default FavoriteScreen;
+FavoriteScreen.propTypes = {
+  favorite: PropTypes.array,
+};
+
+const mapStateToProps = (state) => {
+  const {
+    channels: {favorite},
+  } = state;
+  return {
+    favorite,
+  };
+};
+
+export default connect(mapStateToProps, null)(FavoriteScreen);

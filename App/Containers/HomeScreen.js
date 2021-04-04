@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import {actions} from '../Redux/ChannelsRedux';
 import ChannelCard from '../Component/ChannelCard';
 import {resize} from '../utils/measures';
+import {common} from '../Styles/common';
 
 class HomeScreen extends PureComponent {
   componentDidMount() {
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#5D1049',
+    backgroundColor: common.mainBackgroundColor,
     paddingTop: resize(10),
   },
   loading: {
