@@ -10,7 +10,7 @@ export const getHeaderRight = ({route, navigation}) => {
       <View style={styles.wrapper}>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('Home');
+            navigation.navigate('News');
           }}>
           <Text style={styles.text}>Show News</Text>
         </TouchableOpacity>
@@ -21,7 +21,7 @@ export const getHeaderRight = ({route, navigation}) => {
 
 const styles = StyleSheet.create({
   wrapper: {
-    marginHorizontal: resize(5),
+    marginRight: resize(10),
     paddingHorizontal: resize(5),
   },
   text: {

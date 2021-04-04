@@ -3,7 +3,6 @@ import {View, StyleSheet, FlatList} from 'react-native';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {common} from '../Styles/common';
-import {resize} from '../utils/measures';
 import ChannelCard from '../Component/ChannelCard';
 
 class FavoriteScreen extends PureComponent {
@@ -19,13 +18,7 @@ class FavoriteScreen extends PureComponent {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: common.mainBackgroundColor,
-    paddingTop: resize(10),
-  },
+  container: common.mainContainer,
 });
 
 FavoriteScreen.propTypes = {

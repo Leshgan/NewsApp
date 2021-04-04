@@ -6,6 +6,7 @@ import HomeScreen from '../Containers/HomeScreen';
 import FavoriteScreen from '../Containers/FavoriteScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {getHeaderRight} from './Header';
+import NewsScreen from '../Containers/NewsScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -22,8 +23,8 @@ export default class AppNavigation extends PureComponent {
       <Tab.Screen
         name="Home"
         component={HomeScreen}
-        options={({route}) => ({
-          tabBarIcon: ({focused, color, size}) => (
+        options={() => ({
+          tabBarIcon: ({_focused, color, size}) => (
             <Ionicons name="list" size={size} color={color} />
           ),
           title: 'All channels',
@@ -32,8 +33,8 @@ export default class AppNavigation extends PureComponent {
       <Tab.Screen
         name="Favorite"
         component={FavoriteScreen}
-        options={({route}) => ({
-          tabBarIcon: ({focused, color, size}) => (
+        options={() => ({
+          tabBarIcon: ({_focused, color, size}) => (
             <Ionicons name="star" size={size} color={color} />
           ),
           title: 'Favorite',
@@ -64,6 +65,7 @@ export default class AppNavigation extends PureComponent {
               headerRight: () => getHeaderRight(options),
             })}
           />
+          <Stack.Screen name="News" component={NewsScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     );
