@@ -18,7 +18,7 @@ class ChannelCard extends PureComponent {
     return (
       <View style={styles.wrapper}>
         <View style={styles.content}>
-          <Text style={StyleSheet.flatten([styles.textColor])}>
+          <Text style={StyleSheet.flatten([styles.textColor, styles.title])}>
             {channel.name}
           </Text>
           <Text style={StyleSheet.flatten([styles.textColor])}>
@@ -51,10 +51,16 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  title: {
+    fontSize: resize(16),
+    fontWeight: 'bold',
+    marginBottom: resize(5),
+  },
   content: {
     flexShrink: 10,
     flexBasis: 300,
     padding: resize(5),
+    marginRight: resize(5),
   },
   actions: {
     flexShrink: -10,

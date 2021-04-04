@@ -5,6 +5,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from '../Containers/HomeScreen';
 import FavoriteScreen from '../Containers/FavoriteScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {getHeaderRight} from './Header';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -41,12 +42,6 @@ export default class AppNavigation extends PureComponent {
     </Tab.Navigator>
   );
 
-  mainStack = () => (
-    <Stack.Navigator initialRouteName="tabs">
-      <Stack.Screen name="tabs" component={this.tabBar} />
-    </Stack.Navigator>
-  );
-
   render() {
     return (
       <NavigationContainer>
@@ -62,11 +57,12 @@ export default class AppNavigation extends PureComponent {
           }}>
           <Stack.Screen
             name="App"
-            component={this.mainStack}
-            options={{
+            component={this.tabBar}
+            options={(options) => ({
               headerTitleAlign: 'center',
               title: 'News App',
-            }}
+              headerRight: () => getHeaderRight(options),
+            })}
           />
         </Stack.Navigator>
       </NavigationContainer>
