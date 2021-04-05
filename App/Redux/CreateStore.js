@@ -4,6 +4,7 @@ import createSagaMiddleware from 'redux-saga';
 import AsyncStorage from '@react-native-community/async-storage';
 import {persistReducer, persistStore} from 'redux-persist';
 import {reducer as channelReducer} from './ChannelsRedux';
+import {reducer as newsReducer} from './NewsRedux';
 import rootSaga from '../Sagas';
 
 const sagaMiddleware = createSagaMiddleware();
@@ -17,7 +18,7 @@ if (__DEV__) {
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  blacklist: ['channels'],
+  blacklist: ['channels', 'news'],
 };
 
 const channelsPersistConfig = {
@@ -26,8 +27,15 @@ const channelsPersistConfig = {
   whitelist: ['favorite'],
 };
 
+const newsPersistConfig = {
+  key: 'news',
+  storage: AsyncStorage,
+  whitelist: ['list'],
+};
+
 const rootReducer = combineReducers({
   channels: persistReducer(channelsPersistConfig, channelReducer),
+  news: persistReducer(newsPersistConfig, newsReducer),
   // <- add new reducer here
 });
 
